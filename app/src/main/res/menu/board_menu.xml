@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context= ".MainActivity">
+
+    <item android:id="@+id/board_share"
+            android:title="share"
+            android:icon="@drawable/ic_board_share"
+            android:orderInCategory="100"
+            app:showAsAction="ifRoom" />
+    <item android:id="@+id/board_add"
+            android:title="add"
+            android:orderInCategory="100"
+            android:icon="@drawable/ic_board_add"
+            app:showAsAction="ifRoom"/>
+</menu>
