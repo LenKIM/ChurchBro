@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,12 +18,29 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yyy.xxx.churchbro.model.Bible;
+import com.yyy.xxx.churchbro.model.BibleLab;
+
 /**
  * Created by len on 2017. 2. 7..
  */
 public class BibleFragment extends Fragment {
 
+    private static final String TAG = BibleFragment.class.getName();
+    private static final String ARG_BIBLE_POSTION = "bible_Position";
+    private static final String ARG_CHAPTER_POSTION = "chapter_Position";
+    private static final String ARG_VERSE_POSTION = "verse_Position";
     private TextView text_contents;
+
+    public static BibleFragment newInstance (int bibleNumber, int chapterNumber, int verseNumber) {
+        BibleFragment fragment = new BibleFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_BIBLE_POSTION, bibleNumber);
+        args.putInt(ARG_CHAPTER_POSTION, chapterNumber);
+        args.putInt(ARG_VERSE_POSTION, verseNumber);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
 
 
@@ -40,8 +58,16 @@ public class BibleFragment extends Fragment {
 
         text_contents = (TextView) view.findViewById(R.id.text_contents);
         //TODO SQLite와 REALMS 가져오기.
-        text_contents.setText("해당 선택된 텍스트를 가져오기. 설정해야함.");
-//        if ()
+        StringBuffer sb = new StringBuffer();
+
+        String[][] text = BibleLab.getIntence(getActivity()).getSelectVerse("t_kjv", Bible.getInstance().getBible(),Bible.getInstance().getChapter());
+
+        Log.d(TAG, text.length + "");
+        for (int i = 0; i < text.length; i++) {
+            String contents = " " +(i+1) + " " + text[i][1];
+            sb.append(contents);
+        }
+        text_contents.setText(sb.toString());
 
         return view;
     }
@@ -55,6 +81,8 @@ public class BibleFragment extends Fragment {
 
         toolbar.setLogo(R.drawable.ic_logo);
         Button toolbar_title = (Button) toolbar.findViewById(R.id.toolbar_name_title);
+        //TODO 버튼 눌렀을 때 상위 toolbar에 입력되어야 함
+//        toolbar_title.setText(Bible.getInstance().getBible());
         toolbar_title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

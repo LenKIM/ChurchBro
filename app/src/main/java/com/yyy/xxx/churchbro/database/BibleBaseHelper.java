@@ -250,12 +250,13 @@ public class BibleBaseHelper extends SQLiteOpenHelper {
 
         myDataBase = getReadableDatabase();
         //SELECT c,v FROM t_kjv WHERE b = 1
-        cursor = myDataBase.rawQuery("SELECT c, v, t FROM" + "'" +bibleVersion + "'" + " WHERE b ="+ bible + "and" + "v=" + chapter,null);
+        cursor = myDataBase.rawQuery("SELECT v FROM " + "'" +bibleVersion + "'" + " WHERE b ="+ bible + " and " + "c=" + chapter,null);
 
         if (cursor.moveToFirst()){
 
             do {
                 chapterCount = cursor.getInt(0);
+                list.add(chapterCount);
 
             } while (cursor.moveToNext());
 
@@ -270,8 +271,6 @@ public class BibleBaseHelper extends SQLiteOpenHelper {
 //        return count;
         return list2;
     }
-
-
 
     //성경 장 절 선택 // 성경이랑 장 선택했을때 이미 텍스트를 가져오고 텍스트를 뿌린 뒤, 장을 통해서 필요 텍스트를 뿌린다.
     public String[][] getSelectedTextArea(String bibleVersion,int bibleName, int chapter){

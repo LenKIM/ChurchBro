@@ -22,7 +22,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private ImageView mImageView;
     private BibleBaseHelper mHelper;
-    private static final int INTERVERTIME = 3000;
+    private static final int INTERVERTIME = 1000;
 
 
     @Override
@@ -63,7 +63,7 @@ public class SplashActivity extends AppCompatActivity {
 
         long endTime = System.currentTimeMillis();
 
-        Log.d(TAG, (endTime - startTime / 1000) + "");
+        Log.d(TAG, (endTime - startTime) / 1000 + "");
     }
 
 

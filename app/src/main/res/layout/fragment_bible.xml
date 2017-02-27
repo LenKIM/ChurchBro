@@ -35,7 +35,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="창세기"
-                            android:textColor="@android:color/white"
+                            android:textColor="@android:color/black"
                             android:background="?android:attr/selectableItemBackground"
                             />
                     <Button
@@ -44,7 +44,7 @@
                             android:layout_height="wrap_content"
                             android:text="KRV"
                             android:layout_toRightOf="@id/toolbar_name_title"
-                            android:textColor="@android:color/white"
+                            android:textColor="@android:color/black"
                             android:background="?android:attr/selectableItemBackground"
                             />
                 </RelativeLayout>
@@ -64,6 +64,8 @@
             <TextView
                     android:id="@+id/text_contents"
                     android:layout_width="match_parent"
+                    android:textSize="20sp"
+
                     android:layout_height="match_parent"
                     android:text="여기는 테스트 부분입니다."
                     />

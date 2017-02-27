@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.yyy.xxx.churchbro.model.BibleLab;
 
@@ -25,16 +24,17 @@ public class SelectChapterFragment extends Fragment {
     private static final String TAG = "SelectChapterFragment";
     private static final String ARG_BIBLE_POSTION = "bible_postion";
 
-    //TODO 상위 액티비티에서 가져와야함.
     private int biblePostion = 1;
-    private RecyclerView mRecyclerView;
-    private ChapterNameAdapter mChapterNameAdapter;
+    onChapterNumberistener mCallback;
 
+    public interface onChapterNumberistener{
+        void deliverChapterName(int chapterNumber);
+    }
 
     public static SelectChapterFragment newInstance (int bibleNumber) {
         SelectChapterFragment fragment = new SelectChapterFragment();
         Bundle args = new Bundle();
-        args.putInt("number", bibleNumber);
+        args.putInt(ARG_BIBLE_POSTION, bibleNumber);
         fragment.setArguments(args);
         return fragment;
     }
@@ -43,12 +43,21 @@ public class SelectChapterFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         Log.d(TAG, "onAttach 호출");
+
+        try {
+            mCallback = (onChapterNumberistener) context;
+        }catch (ClassCastException e){
+            throw new ClassCastException(context.toString() + " must implement onChapterNumberistener");
+        }
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCrate 호출");
+        if (getArguments() != null){
+            biblePostion = getArguments().getInt(ARG_BIBLE_POSTION);
+        }
     }
 
     @Override
@@ -65,16 +74,17 @@ public class SelectChapterFragment extends Fragment {
 
 
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_select_chapter, container, false);
-         mRecyclerView = (RecyclerView) view.findViewById(R.id.chapter_RecyclerView);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.chapter_RecyclerView);
 
-        mChapterNameAdapter = new ChapterNameAdapter();
-        Log.d("onCreateSelectChapter", biblePostion + "");
-        mRecyclerView.setAdapter(mChapterNameAdapter);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 5));
+        ChapterNameAdapter chapterNameAdapter = new ChapterNameAdapter(biblePostion);
+
+        recyclerView.setAdapter(chapterNameAdapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 5));
 
 
         return view;
@@ -92,20 +102,26 @@ public class SelectChapterFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(getActivity(), ChapterNameTextView.getText() + "", Toast.LENGTH_SHORT).show();
-
+//            Toast.makeText(getActivity(), ChapterNameTextView.getText() + "", Toast.LENGTH_SHORT).show();
+            mCallback.deliverChapterName(getLayoutPosition()+1);
         }
     }
 
-    private class ChapterNameAdapter extends RecyclerView.Adapter<ViewHolder> {
+    public class ChapterNameAdapter extends RecyclerView.Adapter<ViewHolder> {
 
         private ArrayList<String> ChapterNameList;
         private BibleLab bibleLab;
 
-        public ChapterNameAdapter() {
+        public ChapterNameAdapter(int bibleNumber) {
+
             ChapterNameList = new ArrayList<>();
+
             bibleLab = BibleLab.getIntence(getActivity());
-            ChapterNameList = bibleLab.getSelectedChapter("t_kjv", biblePostion);
+            if (bibleNumber == 0){
+                bibleNumber = 1;
+            }
+
+            ChapterNameList = bibleLab.getSelectedChapter("t_kjv", bibleNumber);
         }
 
 
@@ -130,5 +146,6 @@ public class SelectChapterFragment extends Fragment {
             return ChapterNameList.size();
         }
     }
+
 
 }

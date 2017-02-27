@@ -73,7 +73,6 @@ public class SelectBibleFragment extends Fragment {
             bibleNameNumber = getLayoutPosition()+1;
             mBibleNameListener.deliverBibleName(bibleNameNumber);
 
-            //TODO 선택하는 성격의 장과 절을 인텐트에 담아야 한다.
         }
     }
 
@@ -115,7 +114,6 @@ public class SelectBibleFragment extends Fragment {
         super.onAttach(context);
 
         try{
-
             mBibleNameListener = (onBibleNameListener) context;
 
         }catch (ClassCastException e){

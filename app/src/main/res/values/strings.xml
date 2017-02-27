@@ -5,5 +5,5 @@
     <string name="item_board_share">공유하기</string>
     <string name="select_activity_bible">성경</string>
     <string name="select_activity_chapter">장</string>
-    <string name="select_activity_verse">장</string>
+    <string name="select_activity_verse">절</string>
 </resources>
