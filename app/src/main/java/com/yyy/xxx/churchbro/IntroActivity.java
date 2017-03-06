@@ -34,5 +34,7 @@ public class IntroActivity extends AppCompatActivity {
                 startActivity(new Intent(IntroActivity.this, MainActivity.class));
             }
         });
+
+        //Authentication
     }
 }

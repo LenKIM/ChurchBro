@@ -38,6 +38,9 @@ public class SelectBibleFragment extends Fragment {
         if (savedInstanceState != null){
         }
         setHasOptionsMenu(true);
+
+
+
     }
 
     @Nullable
@@ -119,6 +122,9 @@ public class SelectBibleFragment extends Fragment {
         }catch (ClassCastException e){
             throw new ClassCastException(context.toString() + " must implement OnArticleSelectedListener");
         }
+
+
+
     }
 
     @Override
