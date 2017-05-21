@@ -94,17 +94,7 @@ public class SelectVerseFragment  extends Fragment {
         @Override
         public void onClick(View v) {
             Bible.getInstance().setVerse(getLayoutPosition() + 1);
-
             mListener.isDeliverTextEnd(true);
-
-//
-//            if (getTargetFragment() == null){
-//                return;
-//            }
-//            Intent in = new Intent();
-//
-//            getTargetFragment()
-//                    .onActivityResult(getTargetRequestCode(), 100, in);
 
         }
     }

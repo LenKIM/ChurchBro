@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 /**
  * Created by len on 2017. 2. 14..
+ * SQLite DateBase를 활용하는 클래스.
+ *
  */
 
 public class BibleLab {
