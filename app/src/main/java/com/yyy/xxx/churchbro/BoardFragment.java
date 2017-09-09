@@ -60,12 +60,12 @@ public class BoardFragment extends Fragment {
         int id = item.getItemId();
 
         if (id == R.id.board_share){
-            Toast.makeText(getActivity(), "공유이 되는가?", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "공유되는가?", Toast.LENGTH_SHORT).show();
             return true;
         }
 
         if (id == R.id.board_add){
-            Toast.makeText(getActivity(), "더하기가 되는가?", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "더하기 되는가?", Toast.LENGTH_SHORT).show();
             return true;
         }
 
