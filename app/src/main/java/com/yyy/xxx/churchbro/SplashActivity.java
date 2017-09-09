@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.yyy.xxx.churchbro.database.BibleBaseHelper;
+import com.yyy.xxx.churchbro.thread.RegistrationIntentService;
 
 import java.io.IOException;
 
@@ -64,6 +65,10 @@ public class SplashActivity extends AppCompatActivity {
         long endTime = System.currentTimeMillis();
 
         Log.d(TAG, (endTime - startTime) / 1000 + "");
+
+        //FirebaseService
+        Intent intent = new Intent(this, RegistrationIntentService.class);
+        startService(intent);
     }
 
 
